@@ -11,26 +11,44 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "edicao")
+@Table(name = "edition")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Edicao extends BaseEntity {
+public class Edition extends BaseEntity {
 
     @Column(nullable = false)
-    private String titulo;
+    private String title;
 
-    @Column(name = "data_inicio")
-    private LocalDate dataInicio;
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
-    @Column(name = "data_fim")
-    private LocalDate dataFim;
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @Column(name = "born_from")
+    private LocalDate bornFrom;
+
+    @Column(name = "born_to")
+    private LocalDate bornTo;
+
+    @Column(name = "associated_until", nullable = false)
+    private LocalDate associatedUntil;
+
+    @Column(name = "link_expiry_date")
+    private LocalDate linkExpiryDate;
+
+    @Column(name = "link")
+    private String link;
+
+    @Column(name = "terms", columnDefinition = "TEXT")
+    private String terms;
 
     @Column(nullable = false)
-    private boolean ativo;
+    private boolean active;
 
     @Override
     public final boolean equals(Object o) {
@@ -39,8 +57,8 @@ public class Edicao extends BaseEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Edicao edicao = (Edicao) o;
-        return getId() != null && Objects.equals(getId(), edicao.getId());
+        Edition edition = (Edition) o;
+        return getId() != null && Objects.equals(getId(), edition.getId());
     }
 
     @Override
